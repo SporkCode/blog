@@ -1,0 +1,30 @@
+services:
+  nginx:
+    build:
+      target: nginx
+      args:
+        WORDPRESS_VERSION: local
+    ports:
+      - "8080:80"
+    depends_on:
+      - php
+  php:
+    build:
+      target: php
+      args:
+        WORDPRESS_VERSION: local
+    environment:
+      DB_HOST: db
+      DB_NAME: sporkcode
+      DB_USER: LOCAL_DB_USER
+      DB_PASSWORD: LOCAL_DB_PASSWORD
+    depends_on:
+      - db
+  db:
+    image: mariadb:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: LOCAL_DB_ROOT_PASSWORD
+      MYSQL_DATABASE: sporkcode
+      MYSQL_USER: LOCAL_DB_USER
+      MYSQL_PASSWORD: LOCAL_DB_PASSWORD
