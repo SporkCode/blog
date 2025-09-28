@@ -1,6 +1,6 @@
 ARG WORDPRESS_VERSION=6.8.2
 
-FROM alpine:3.21 AS theme
+FROM alpine:3.22 AS theme
 
 RUN apk add --no-cache curl rsync
 
